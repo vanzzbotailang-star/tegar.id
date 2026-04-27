@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Novel Cinta Login Key</title>
+
+<style>
+body{
+  margin:0;
+  font-family:monospace;
+  background:black;
+  overflow:hidden;
+  color:white;
+}
+
+/* BACKGROUND */
+canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:0;
+}
+
+/* LOGIN */
+#login{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#1a001f,#000);
+  z-index:10;
+}
+
+.box{
+  width:320px;
+  padding:25px;
+  background:rgba(0,0,0,0.85);
+  border:2px solid #ff2bd6;
+  box-shadow:0 0 35px #ff2bd6;
+  border-radius:15px;
+  text-align:center;
+}
+
+.title{
+  color:#ff2bd6;
+  font-size:20px;
+  margin-bottom:10px;
+  animation:glitch 1s infinite;
+}
+
+@keyframes glitch{
+  0%{text-shadow:2px 0 red,-2px 0 blue;}
+  50%{text-shadow:-2px 0 red,2px 0 blue;}
+  100%{text-shadow:2px 0 red,-2px 0 blue;}
+}
+
+input{
+  width:85%;
+  margin:8px;
+  padding:10px;
+  background:black;
+  border:1px solid #ff2bd6;
+  color:#ff2bd6;
+}
+
+button{
+  padding:10px 15px;
+  background:#ff2bd6;
+  border:none;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* APP */
+#app{
+  display:none;
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:5;
+}
+
+/* BOOK */
+.book{
+  width:80%;
+  height:85%;
+  margin:4% auto;
+  background:rgba(0,0,0,0.65);
+  border:2px solid #ff2bd6;
+  box-shadow:0 0 40px #ff2bd6;
+  border-radius:15px;
+  padding:20px;
+  overflow:hidden;
+}
+
+#text{
+  font-size:16px;
+  line-height:1.8;
+  white-space:pre-wrap;
+}
+
+.cursor{
+  display:inline-block;
+  width:8px;
+  background:#ff2bd6;
+  animation:blink .7s infinite;
+}
+
+@keyframes blink{50%{opacity:0;}}
+
+.nav{
+  position:absolute;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+}
+
+button.navbtn{
+  margin:5px;
+}
+
+/* LOVE */
+.heart{
+  position:absolute;
+  color:pink;
+  animation:up 3s linear forwards;
+}
+
+@keyframes up{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-200px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="box">
+    <div class="title">💖 NOVEL CINTA LOGIN 💖</div>
+
+    <input id="key" placeholder="KEY (contoh: LOVE2026)">
+    <input id="pass" type="password" placeholder="PASSWORD">
+
+    <button onclick="login()">MASUK 💌</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <div class="book">
+    <div id="text"></div>
+
+    <div class="nav">
+      <button class="navbtn" onclick="prev()">⬅</button>
+      <button class="navbtn" onclick="next()">➡</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+/* ===== LOGIN SYSTEM ===== */
+function login(){
+  let key=document.getElementById("key").value;
+  let pass=document.getElementById("pass").value;
+
+  if(key==="tegar" && pass==="wulan"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+    show(0);
+  }else{
+    alert("KEY / PASSWORD SALAH 💔");
+  }
+}
+
+/* ===== NOVEL ROMANTIS ===== */
+const story=[
+`💖 Aku tidak tahu sejak kapan kamu menjadi bagian dari hidupku, tapi sekarang kamu adalah bagian yang paling sulit untuk aku hilangkan.`,
+
+`💖 Setiap hari aku memikirkanmu tanpa alasan, seperti hatiku sudah terbiasa memanggil namamu tanpa suara.`,
+
+`💖 Kamu bukan sekadar seseorang, kamu adalah tempat pikiranku selalu kembali tanpa aku sadari.`,
+
+`💖 Jika cinta adalah sistem, maka kamu adalah kode yang tidak pernah ingin aku hapus.`,
+
+`💖 Aku tidak butuh dunia yang sempurna, aku hanya butuh kamu yang tetap ada di sini.`,
+
+`💖 Bahkan saat aku diam, namamu tetap hidup di dalam pikiranku.`,
+
+`💖 Aku tidak tahu masa depan, tapi aku ingin kamu ada di setiap versi hidupku.`,
+
+`💖 Jika aku harus memilih lagi, aku tetap akan memilih kamu tanpa ragu.`
+];
+
+/* ===== GENERATE 8 PAGE ===== */
+let pages=[];
+for(let i=1;i<=8;i++){
+  pages.push(
+`📖 HALAMAN ${i}
+
+${story[i % story.length]}
+
+${story[(i+2)%story.length]}
+
+💌 Aku tidak tahu apa yang akan terjadi nanti,
+tapi satu hal yang pasti...
+
+perasaan ini tidak pernah berkurang.
+
+— dari seseorang yang selalu memikirkanmu 💖`
+  );
+}
+
+/* ===== SYSTEM ===== */
+let current=0;
+let i=0;
+
+function type(){
+  let box=document.getElementById("text");
+  let txt=pages[current];
+
+  if(i<txt.length){
+    box.innerHTML=txt.substring(0,i+1)+'<span class="cursor"></span>';
+    i++;
+    setTimeout(type,8);
+  }else{
+    box.innerHTML=txt;
+  }
+}
+
+function show(n){
+  current=n;
+  i=0;
+  document.getElementById("text").innerHTML="";
+  type();
+}
+
+function next(){
+  if(current<pages.length-1) show(current+1);
+}
+
+function prev(){
+  if(current>0) show(current-1);
+}
+
+/* LOVE CLICK */
+document.addEventListener("click",e=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),3000);
+});
+
+/* BACKGROUND */
+const c=document.getElementById("bg");
+const ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2});
+}
+
+function draw(){
+  ctx.fillStyle="black";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  ctx.fillStyle="white";
+  for(let s of stars){
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+</script>
+
+</body>
+</html>
